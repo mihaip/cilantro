@@ -2,6 +2,7 @@ $ = document.getElementById.bind(document);
 
 var postingFormNode = $('posting-form');
 var noteNode = $('note');
+var shareContainerNode = $('share-container');
 var shareCheckboxNode = $('share-checkbox');
 var shareLinkNode = $('share-link');
 var shareData;
@@ -9,6 +10,10 @@ var shareData;
 postingFormNode.onsubmit = handleFormSubmit;
 
 getShareData(function(loadedShareData) {
+  if (!loadedShareData || !loadedShareData.url) {
+    shareContainerNode.style.display = 'none';
+    return;
+  }
   shareData = loadedShareData;
   shareCheckboxNode.checked = true;
   shareLinkNode.href = shareData.url;
