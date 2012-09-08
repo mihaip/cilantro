@@ -5,6 +5,7 @@ var noteNode = $('note');
 var shareContainerNode = $('share-container');
 var shareCheckboxNode = $('share-checkbox');
 var shareLinkNode = $('share-link');
+var statusNode = $('status');
 var shareData;
 
 postingFormNode.onsubmit = handleFormSubmit;
@@ -36,10 +37,11 @@ function handleFormSubmit(event) {
   getSignature(function(signature) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function() {
-      alert('success: ' + xhr.responseText);
+      setStatus('Sent!');
+      setTimeout(function() {window.close()}, 1000);
     };
     xhr.onerror = function() {
-      alert('failure: ' + xhr.responseText);
+      setStatus('Failure: ' + xhr.responseText);
     };
 
     xhr.open(
@@ -92,15 +94,19 @@ function getSignature(callback) {
   xhr.onload = function() {
     var match = SIGNATURE_RE.exec(xhr.responseText);
     if (!match) {
-      alert('Couldn\'t find signature');
+      setStatus('Couldn\'t find Avocado signature.');
       return;
     }
 
     callback(match[1]);
   };
   xhr.onerror = function() {
-    alert('xhr error');
+    setStatus('Avocado signature XHR error.' + xhr.responseText);
   };
   xhr.open('GET', 'https://avocado.io/=/', true);
   xhr.send();
+}
+
+function setStatus(message) {
+  statusNode.textContent = message;
 }
