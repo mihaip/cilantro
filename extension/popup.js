@@ -15,7 +15,7 @@ for (var i = 0, closingEl; closingEl = closingElements[i]; i++) {
 }
 
 if (window.devicePixelRatio >= 1.5) {
-  document.body.className = 'retina';
+  document.body.classList.add('retina');
 }
 
 getSignature(function(signature) {
@@ -30,8 +30,8 @@ getShareData(function(loadedShareData) {
   shareData = loadedShareData;
   shareCheckboxNode.checked = true;
   shareLinkNode.href = shareData.url;
-  if (shareData.title.length > 30) {
-    shareLinkNode.innerText = shareData.title.substring(0, 30) + '…';
+  if (shareData.title.length > 35) {
+    shareLinkNode.innerText = shareData.title.substring(0, 35) + '…';
   } else {
     shareLinkNode.innerText = shareData.title;
   }

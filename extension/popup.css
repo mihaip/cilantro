@@ -4,11 +4,11 @@ body {
 }
 
 #content {
+  position: relative;
   font-family: "Helvetica Neue UltraLight", "Helvetica Neue", "Helvetica Light", Helvetica, Arial;
   background-image: -webkit-linear-gradient(top, #454545, #0d0d0d);
   color: #ddd;
   padding: 12px 15px 102px;
-  border: 1px solid #000;
   border-radius: 2px;
   font-weight: 200;
   width: 360px;
@@ -19,10 +19,9 @@ h1 {
   padding-bottom: 0.2em;
   margin: 3px 0;
   font-weight: 100;
-}
-h1 {
   font-size: 25px;
 }
+
 .retina h1 {
   font-weight: 200;
 }
@@ -33,12 +32,10 @@ a:active {
   color: #ddd;
 }
 
-
 /* Buttons. */
 
 button,
-.button,
-.button:visited {
+input[type="submit"] {
   display: inline-block;
   line-height: 1.2em;
 
@@ -47,13 +44,7 @@ button,
 
   box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, .1);
 
-  background: #87ae39;
-  background-image: linear-gradient(top, #87ae39, #6c9c0d);
   background-image: -webkit-linear-gradient(top, #87ae39, #6c9c0d);
-  background-image: -webkit-gradient(
-    linear, left top, left bottom,
-    #87ae39, #6c9c0d
-  );
 
   border: none;
   border-radius: 5px;
@@ -91,55 +82,12 @@ select {
   color: #aaa;
 }
 
-input[type="image"],
-input[type="checkbox"],
-input[type="radio"] {
-  width: auto;
-  height: auto;
-  padding: 0;
-  margin: 3px 0;
-  line-height: normal;
-  cursor: pointer;
-  border-radius: 0;
-}
-input[type="image"] {
-  border: 0;
-}
-
-input[type="file"] {
-  width: auto;
-  padding: initial;
-  line-height: initial;
-  border: initial;
-  background-color: initial;
-  box-shadow: none;
-}
-
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
   width: auto;
   height: auto;
   cursor: pointer;
-}
-
-select,
-input[type="file"] {
-  line-height: 28px;
-}
-
-input[type="file"] {
-  line-height: 18px \9;
-}
-
-select {
-  width: 220px;
-  background-color: #fff;
-}
-
-select[multiple],
-select[size] {
-  height: auto;
 }
 
 input,
@@ -152,60 +100,6 @@ textarea:focus {
   border-color: rgba(82,168,236,.8);
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
   outline: 0;
-}
-input[type="image"],
-input[type="file"]:focus,
-input[type="radio"]:focus,
-input[type="checkbox"]:focus,
-select:focus {
-  box-shadow: none;
-}
-
-input[disabled],
-textarea[disabled] {
-  color: #999;
-  background: #f0f0f0;
-}
-
-
-/* Special form stuff. */
-
-.placeholder-label {
-  position: relative;
-  display: block;
-  margin-top: 10px;
-  background: #fff;
-}
-
-.placeholder-label .placeholder {
-  opacity: 0;
-
-  position: absolute;
-  color: #999;
-  top: 50%;
-  left: 10px;
-  margin-top: -10px;
-  line-height: 20px;
-  z-index: 0;
-}
-
-.placeholder-label input {
-  position: relative;
-  z-index: 1;
-  background: transparent;
-}
-.placeholder-label input[disabled] {
-  background: #f0f0f0;
-}
-.placeholder-label .placeholder,
-.placeholder-label.empty.focused .placeholder {
-  -webkit-transition: opacity 0.1s ease;
-}
-.placeholder-label.empty .placeholder {
-  opacity: 1;
-}
-.placeholder-label.focused .placeholder {
-  -webkit-transition: none;
 }
 
 #logo {
@@ -226,6 +120,7 @@ textarea[disabled] {
 
 #share-container {
   font-size: 14px;
+  white-space: nowrap;
 }
 
 .close {
