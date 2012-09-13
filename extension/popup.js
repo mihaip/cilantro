@@ -18,7 +18,9 @@ if (window.devicePixelRatio >= 1.5) {
   document.body.className = 'retina';
 }
 
-postingFormNode.onsubmit = handleFormSubmit;
+getSignature(function(signature) {
+  postingFormNode.onsubmit = handleFormSubmit.bind(this, signature);
+});
 
 getShareData(function(loadedShareData) {
   if (!loadedShareData || !loadedShareData.url) {
@@ -35,7 +37,7 @@ getShareData(function(loadedShareData) {
   }
 });
 
-function handleFormSubmit(event) {
+function handleFormSubmit(signature, event) {
   event.preventDefault();
 
   var note = noteNode.value;
@@ -44,23 +46,21 @@ function handleFormSubmit(event) {
     note += '\n' + shareData.title + ' - ' + shareData.url;
   }
 
-  getSignature(function(signature) {
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-      setStatus('Hooray! Sent to Avocado!');
-      setTimeout(function() {window.close()}, 1000);
-    };
-    xhr.onerror = function() {
-      setStatus('Failure: ' + xhr.responseText);
-    };
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    setStatus('Hooray! Sent to Avocado!');
+    setTimeout(function() {window.close()}, 1000);
+  };
+  xhr.onerror = function() {
+    setStatus('Failure: ' + xhr.responseText);
+  };
 
-    xhr.open(
-        'POST',
-        'https://avocado.io/api/conversation?avosig=' + encodeURIComponent(signature),
-        true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send('message=' + encodeURIComponent(note));
-  });
+  xhr.open(
+      'POST',
+      'https://avocado.io/api/conversation?avosig=' + encodeURIComponent(signature),
+      true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.send('message=' + encodeURIComponent(note));
 }
 
 function getShareData(callback) {
