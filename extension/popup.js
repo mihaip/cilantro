@@ -9,6 +9,15 @@ var statusMessageNode = $('status-message');
 var statusSubMessageNode = $('status-sub-message');
 var shareData;
 
+var closingElements = document.querySelectorAll('.close');
+for (var i = 0, closingEl; closingEl = closingElements[i]; i++) {
+  closingEl.addEventListener('click', closePopup);
+}
+
+if (window.devicePixelRatio >= 1.5) {
+  document.body.className = 'retina';
+}
+
 postingFormNode.onsubmit = handleFormSubmit;
 
 getShareData(function(loadedShareData) {
@@ -103,7 +112,7 @@ function getSignature(callback) {
         'Oopsie, looks like you need to be logged into Avocado before you can send links with Cilantro.');
       var closeButton = document.querySelector('#status .close');
       closeButton.textContent = 'Login';
-      closeButton.removeEventListener(closePopup);
+      closeButton.removeEventListener('click', closePopup);
       closeButton.addEventListener('click', function() {
         window.open('https://avocado.io/login');
       });
@@ -124,20 +133,3 @@ function setStatus(message, opt_subMessage) {
   if (opt_subMessage) statusSubMessageNode.textContent = opt_subMessage;
   document.body.className = 'has-status';
 }
-
-function isRetina() {
-  return window.devicePixelRatio && window.devicePixelRatio >= 1.5;
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  var closingElements = document.querySelectorAll('.close');
-  for (var i = 0, closingEl; closingEl = closingElements[i]; i++) {
-    closingEl.addEventListener('click', closePopup);
-  }
-
-  if (isRetina()) {
-    document.body.className = 'retina';
-  }
-});
-
-
