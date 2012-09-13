@@ -1,27 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8" />
-	<title>Cilantro</title>
-	<link rel="stylesheet" href="popup.css">
+  <meta charset="utf-8" />
+  <title>Cilantro</title>
+  <link rel="stylesheet" href="popup.css">
 </head>
 <body>
+<div id="content">
+  <h1>Send to Avocado</h1>
 
-<div id="status"></div>
-
-<form id="posting-form">
-  <textarea id="note"></textarea>
-
-  <label id="share-container">
-    <input type="checkbox" id="share-checkbox">
-    Share "<a id="share-link" target="_blank"></a>"
-  </label>
-
-  <div id="buttons">
-    <input type="submit" value="Send">
+  <div id="status">
+    <div id="status-message"></div>
+    <div id="status-sub-message"></div>
+    <button class="close">Close</button>
   </div>
-</form>
 
+  <form id="posting-form">
+    <textarea id="note" placeholder="Add a comment"></textarea>
+
+    <label id="share-container">
+      <input type="checkbox" id="share-checkbox">
+      Share "<a id="share-link" target="_blank"></a>"
+    </label>
+
+    <div id="buttons">
+      <span class="close">Cancel</span>
+      <input type="submit" value="Send" class="button">
+    </div>
+  </form>
+  <img src="cilantro_512.png" id="logo">
+</div>
 <script src="popup.js"></script>
 </body>
 </html>

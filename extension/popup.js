@@ -5,7 +5,8 @@ var noteNode = $('note');
 var shareContainerNode = $('share-container');
 var shareCheckboxNode = $('share-checkbox');
 var shareLinkNode = $('share-link');
-var statusNode = $('status');
+var statusMessageNode = $('status-message');
+var statusSubMessageNode = $('status-sub-message');
 var shareData;
 
 postingFormNode.onsubmit = handleFormSubmit;
@@ -37,7 +38,7 @@ function handleFormSubmit(event) {
   getSignature(function(signature) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function() {
-      setStatus('Sent!');
+      setStatus('Hooray! Sent to Avocado!');
       setTimeout(function() {window.close()}, 1000);
     };
     xhr.onerror = function() {
@@ -89,12 +90,23 @@ function getReaderShareData(tab, callback) {
 
 var SIGNATURE_RE = /var\s+apiSignature\s+=\s+"(.+)";/m;
 
+function closePopup() {
+  window.close();
+}
+
 function getSignature(callback) {
   var xhr = new XMLHttpRequest();
   xhr.onload = function() {
     var match = SIGNATURE_RE.exec(xhr.responseText);
     if (!match) {
-      setStatus('Couldn\'t find Avocado signature.');
+      setStatus('Not logged into Avocado',
+        'Oopsie, looks like you need to be logged into Avocado before you can send links with Cilantro.');
+      var closeButton = document.querySelector('#status .close');
+      closeButton.textContent = 'Login';
+      closeButton.removeEventListener(closePopup);
+      closeButton.addEventListener('click', function() {
+        window.open('https://avocado.io/login');
+      });
       return;
     }
 
@@ -107,6 +119,25 @@ function getSignature(callback) {
   xhr.send();
 }
 
-function setStatus(message) {
-  statusNode.textContent = message;
+function setStatus(message, opt_subMessage) {
+  statusMessageNode.textContent = message;
+  if (opt_subMessage) statusSubMessageNode.textContent = opt_subMessage;
+  document.body.className = 'has-status';
 }
+
+function isRetina() {
+  return window.devicePixelRatio && window.devicePixelRatio >= 1.5;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var closingElements = document.querySelectorAll('.close');
+  for (var i = 0, closingEl; closingEl = closingElements[i]; i++) {
+    closingEl.addEventListener('click', closePopup);
+  }
+
+  if (isRetina()) {
+    document.body.className = 'retina';
+  }
+});
+
+

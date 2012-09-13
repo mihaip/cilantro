@@ -3,7 +3,12 @@
   "name": "Cilantro",
   "version": "1.0",
   "browser_action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": "chrome_icon.png"
+  },
+  "icons": {
+    "16": "chrome_icon.png",
+    "128": "cilantro_512.png"
   },
   "permissions": [
     "https://avocado.io/",
