@@ -2,6 +2,7 @@ $ = document.getElementById.bind(document);
 
 var postingFormNode = $('posting-form');
 var noteNode = $('note');
+var noteMirrorNode = document.querySelector('#note-container span');
 var shareContainerNode = $('share-container');
 var shareCheckboxNode = $('share-checkbox');
 var shareLinkNode = $('share-link');
@@ -13,6 +14,15 @@ var closingElements = document.querySelectorAll('.close');
 for (var i = 0, closingEl; closingEl = closingElements[i]; i++) {
   closingEl.addEventListener('click', closePopup);
 }
+
+// Mirror the contents of the text area so that the container node is as big
+// as the text's height, which in turn makes the textarea's height be as big as
+// its contents. For more details, see
+// http://www.alistapart.com/articles/expanding-text-areas-made-elegant/
+noteNode.addEventListener('input', function() {
+ noteMirrorNode.textContent = noteNode.value;
+});
+noteMirrorNode.textContent = noteNode.value;
 
 if (window.devicePixelRatio >= 1.5) {
   document.body.classList.add('retina');

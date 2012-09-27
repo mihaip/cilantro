@@ -39,6 +39,8 @@ input[type="submit"] {
   display: inline-block;
   line-height: 1.2em;
 
+  font-family: inherit;
+  font-size: inherit;
   font-weight: normal;
   padding: 8px 30px;
 
@@ -53,57 +55,51 @@ input[type="submit"] {
   text-shadow: 0px 1px 1px rgba(0,0,0,0.6);
 }
 
+/* Expanding textarea, see http://www.alistapart.com/articles/expanding-text-areas-made-elegant/ */
+#note-container {
+  position: relative;
+  border: solid 1px #ccc;
+  border-radius: 3px;
+  background: #fff;
+  width: 350px;
+  margin: 9px 0;
+}
 
-/* Form inputs -- mostly borrowed from Bootstrap. */
-
-input,
-textarea {
-  display: inline-block;
+#note-container > textarea,
+#note-container > pre {
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
   line-height: inherit;
+  margin: 0;
   padding: 6px;
-  color: #333;
-  border: 1px solid #ccc;
-}
-
-::-webkit-input-placeholder {
-  color: #aaa;
-}
-
-input[type="submit"] {
-  width: auto;
-  height: auto;
-  cursor: pointer;
-}
-
-input,
-textarea {
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-  -webkit-transition: border linear .2s, box-shadow linear .2s;
-}
-
-input:focus,
-textarea:focus {
-  border-color: rgba(82,168,236,.8);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+  background: transparent;
+  /* Make the text soft-wrap */
+  white-space: pre-wrap;
+  word-wrap: break-word;
   outline: 0;
+  border: 0;
+}
+
+#note-container > textarea {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  resize: none;
+}
+
+#note-container > pre {
+  visibility: hidden;
 }
 
 #logo {
   position: absolute;
   bottom: 15px;
   left: 21px;
-}
-
-#note {
-  width: 345px;
-  height: 50px;
-  display: block;
-  border: solid 1px #ccc;
-  border-radius: 3px;
-  margin: 9px 0;
 }
 
 #share-container {
