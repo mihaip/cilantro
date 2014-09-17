@@ -8,6 +8,8 @@ var shareCheckboxNode = $('share-checkbox');
 var shareLinkNode = $('share-link');
 var statusMessageNode = $('status-message');
 var statusSubMessageNode = $('status-sub-message');
+var sendKiss = document.querySelector('.kiss');
+var sendHug = document.querySelector('.hug');
 var shareData;
 
 var closingElements = document.querySelectorAll('.close');
@@ -30,6 +32,8 @@ if (window.devicePixelRatio >= 1.5) {
 
 getSignature(function(signature) {
   postingFormNode.onsubmit = handleFormSubmit.bind(this, signature);
+  sendHug.onclick = handleSendHug.bind(this, signature);
+  sendKiss.onclick = handleSendKiss.bind(this, signature);
 });
 
 getShareData(function(loadedShareData) {
@@ -46,6 +50,44 @@ getShareData(function(loadedShareData) {
     shareLinkNode.innerText = shareData.title;
   }
 });
+
+function handleSendHug(signature, event){
+  event.preventDefault();
+
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    setStatus('Hooray! Sent a hug!');
+    setTimeout(function() {window.close()}, 1000);
+  };
+  xhr.onerror = function() {
+    setStatus('Failure: ' + xhr.responseText);
+  };
+  xhr.open(
+      'POST',
+      'https://avocado.io/api/conversation/hug?avosig=' + encodeURIComponent(signature),
+      true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.send();
+}
+
+function handleSendKiss(signature, event){
+  event.preventDefault();
+
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    setStatus('Hooray! Kissed!');
+    setTimeout(function() {window.close()}, 1000);
+  };
+  xhr.onerror = function() {
+    setStatus('Failure: ' + xhr.responseText);
+  };
+  xhr.open(
+      'POST',
+      'https://avocado.io/api/conversation/kiss?avosig=' + encodeURIComponent(signature),
+      true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.send('x=0.5&y=0.5&rotation=0.2');
+}
 
 function handleFormSubmit(signature, event) {
   event.preventDefault();
