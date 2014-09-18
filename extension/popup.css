@@ -122,7 +122,19 @@ input[type="submit"] {
 #buttons input[type="submit"] {
   margin-left: 15px;
 }
-
+#xoxo{
+  position: absolute;
+  right: 0;
+  padding: 12px 21px 21px 0;
+  text-align: right;
+}
+#xoxo .hug, #xoxo .kiss{
+  padding: 0px 4px;
+}
+#xoxo .hug:hover, #xoxo .kiss:hover{
+  cursor: pointer;
+  cursor: hand;
+}
 #status {
   display: none;
   text-align: center;
