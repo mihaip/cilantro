@@ -8,8 +8,8 @@ var shareCheckboxNode = $('share-checkbox');
 var shareLinkNode = $('share-link');
 var statusMessageNode = $('status-message');
 var statusSubMessageNode = $('status-sub-message');
-var sendKiss = document.querySelector('.kiss');
-var sendHug = document.querySelector('.hug');
+var sendKissNode = document.querySelector('.kiss');
+var sendHugNode = document.querySelector('.hug');
 var shareData;
 
 var closingElements = document.querySelectorAll('.close');
@@ -32,8 +32,8 @@ if (window.devicePixelRatio >= 1.5) {
 
 getSignature(function(signature) {
   postingFormNode.onsubmit = handleFormSubmit.bind(this, signature);
-  sendHug.onclick = handleSendHug.bind(this, signature);
-  sendKiss.onclick = handleSendKiss.bind(this, signature);
+  sendHugNode.onclick = handleSendHug.bind(this, signature);
+  sendKissNode.onclick = handleSendKiss.bind(this, signature);
 });
 
 getShareData(function(loadedShareData) {

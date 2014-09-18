@@ -8,7 +8,7 @@ body {
   font-family: "Helvetica Neue UltraLight", "Helvetica Neue", "Helvetica Light", Helvetica, Arial;
   background-image: -webkit-linear-gradient(top, #454545, #0d0d0d);
   color: #ddd;
-  padding: 12px 15px 102px;
+  padding: 12px 15px 52px;
   border-radius: 2px;
   font-weight: 200;
   width: 360px;
@@ -40,7 +40,7 @@ input[type="submit"] {
   line-height: 1.2em;
 
   font-family: inherit;
-  font-size: inherit;
+  font-size: 16px;
   font-weight: normal;
   padding: 8px 30px;
 
@@ -68,7 +68,7 @@ input[type="submit"] {
 #note-container > textarea,
 #note-container > pre {
   font-family: inherit;
-  font-size: inherit;
+  font-size: 16px;
   font-weight: inherit;
   line-height: inherit;
   margin: 0;
@@ -98,21 +98,21 @@ input[type="submit"] {
 
 #logo {
   position: absolute;
-  bottom: 15px;
+  bottom: 12px;
   left: 21px;
 }
 
 #share-container {
-  font-size: 14px;
+  font-size: 16px;
   white-space: nowrap;
 }
 
 .close {
+  font-size: 16px;
   cursor: pointer;
 }
 
 #buttons {
-  position: absolute;
   bottom: 0;
   right: 0;
   padding: 0 21px 21px 0;
@@ -122,43 +122,56 @@ input[type="submit"] {
 #buttons input[type="submit"] {
   margin-left: 15px;
 }
-#xoxo{
+
+#xoxo {
   position: absolute;
+  bottom: 0;
   right: 0;
-  padding: 12px 21px 21px 0;
+  border-top-left-radius: 8px;
+  background: #43551c;
+  height: 40px;
+  padding: 6px 36px 12px 6px;
   text-align: right;
+  font-size: 16px;
 }
-#xoxo .hug, #xoxo .kiss{
-  padding: 0px 4px;
-}
-#xoxo .hug:hover, #xoxo .kiss:hover{
+
+#xoxo .hug,
+#xoxo .kiss {
+  text-decoration: underline;
   cursor: pointer;
-  cursor: hand;
 }
+
 #status {
   display: none;
   text-align: center;
 }
+
 #status .close {
   margin-top: 48px;
 }
+
 .has-status h1,
-.has-status #posting-form {
+.has-status #posting-form,
+.has-status #xoxo {
   display: none;
 }
+
 .has-status #status {
   display: block;
   color: #fff;
   font-weight: 100;
 }
+
 .has-status #status-message {
   font-size: 28px;
   line-height: 40px;
   text-align: left;
 }
+
 .has-status #status-sub-message {
   text-align: left;
 }
+
 .retina .has-status #status {
   font-weight: 200;
 }
