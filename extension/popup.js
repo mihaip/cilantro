@@ -130,27 +130,8 @@ function getShareData(callback) {
   });
 
   function continueWithTab(tab) {
-    if (tab.url.indexOf('http://www.google.com/reader/') == 0 ||
-        tab.url.indexOf('https://www.google.com/reader/') == 0) {
-      getReaderShareData(tab, callback);
-    } else {
-      callback({url: tab.url, title: tab.title});
-    }
+    callback({url: tab.url, title: tab.title});
   }
-}
-
-function getReaderShareData(tab, callback) {
-  chrome.extension.onMessage.addListener(
-      function readerMessageListener(request, sender, sendResponse) {
-        // Titles from Google Reader are HTML encoded.
-        var tempNode = document.createElement('div');
-        tempNode.innerHTML = request.title;
-        request.title = tempNode.textContent;
-        callback(request);
-        chrome.extension.onMessage.removeListener(readerMessageListener);
-      });
-  chrome.tabs.executeScript(
-      tab.id, {runAt: 'document_start', file: 'reader-share-data.js'});
 }
 
 var SIGNATURE_RE = /var\s+apiSignature\s+=\s+"(.+)";/m;
